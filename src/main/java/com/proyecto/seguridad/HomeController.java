@@ -39,7 +39,7 @@ public class HomeController {
 	}
 	
 	/**
-	 * Responde a la URL "/persona" gracias al RequestMapping.
+	 * Responde a la URL "/correo" gracias al RequestMapping.
 	 * Requiere de un parametro llamado "id", podría ser obcional pero así es más sencillo.
 	 * En vez de devolver un String como el nombre de la vista home.jsp va a devolver un objeto del tipo Persona.
 	 * La etiqueta @ResponseBody le dice a Spring Framework que convierta en objeto una respuesta http.
@@ -47,13 +47,13 @@ public class HomeController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value="/persona", method = RequestMethod.GET)
-	public @ResponseBody Persona obtenerPersona(@RequestParam(value="id", required=true) int id){
+	@RequestMapping(value="/correo", method = RequestMethod.GET)
+	public @ResponseBody Correo obtenerPersona(@RequestParam(value="id", required=true) int id){
 		//Logica para obtener los datos de la persona
-		Persona p = new Persona();
-		p.setNombre("Sergio");
-		p.setApellido("Romero");
-		p.setEdad(20);
-		return p;
+		Correo c = new Correo();
+		c.setDestinatario("sergioromero@opendeusto.es");
+		c.setAsunto("Alguno seguro");
+		c.setMensaje("Soy un mensaje que funcionaaaaaa.");
+		return c;
 	}
 }
