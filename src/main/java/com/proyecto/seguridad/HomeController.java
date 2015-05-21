@@ -43,9 +43,11 @@ public class HomeController {
 	 * Requiere de un parametro llamado "id", podría ser obcional pero así es más sencillo.
 	 * En vez de devolver un String como el nombre de la vista home.jsp va a devolver un objeto del tipo Persona.
 	 * La etiqueta @ResponseBody le dice a Spring Framework que convierta en objeto una respuesta http.
+	 * El parametro value="id" de dentro de la anotacion RequestParam especifica como ha de escribirse la URL
+	 * en el navegador. Ej. correo?id=1
 	 * 
 	 * @param id
-	 * @return
+	 * @return Correo
 	 */
 	@RequestMapping(value="/correo", method = RequestMethod.GET)
 	public @ResponseBody Correo obtenerPersona(@RequestParam(value="id", required=true) int id){
@@ -55,5 +57,21 @@ public class HomeController {
 		c.setAsunto("Alguno seguro");
 		c.setMensaje("Soy un mensaje que funcionaaaaaa.");
 		return c;
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @return Correo
+	 */
+	@RequestMapping(value="/checkSPAM_HAM", method = RequestMethod.GET)
+	public @ResponseBody Boolean checkWhetherSPAMorHAM(@RequestParam(value="emailText", required=true) String text){
+		logger.info("entrando en metodo checkWhetherSPAMorHAM");
+		logger.info("-- string = " + text);
+		Boolean b = null;
+		if (text.equals("bueno bueno")) b = true;
+		else if (text.equals("malo malo")) b = false;
+		logger.info("-- returned value = " + b);
+		return b;
 	}
 }
